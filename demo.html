@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>maps</title>
+   
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js"></script>
+         <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css" rel="stylesheet">
+        <style>
+         #map1 {
+        height: 60vh;
+         width: 100vw;
+         }
+        </style>
+        </head>
+    <body>
+        <div style="position:abslolute;z-index:1000">
+        <div id="map1"></div>
+     </div>
+
+        <script>
+            var mapa;
+            var lg = 77.7179341, lt = 12.973082699999999;
+             var data = "114, EPIP Zone Whitefield Road, Phase 2, Whitefield, Bangalore, Karnataka 560066, India";
+            var token = 'pk.eyJ1IjoiYXJpdHJhMTMxMSIsImEiOiJja29kdmF5OGQwMTQ3MnZtaWcwZTEwNHJkIn0.33O9b6e1reSUATIxwTUaMQ';
+             function mapmaker(token,lg, lt, data="This is marker") {
+                mapboxgl.accessToken = token;
+            mapa = new mapboxgl.Map({
+                    container: 'map1',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [lg, lt], // starting position
+                    zoom: 13 // starting zoom
+                });
+            mapa.addControl(new mapboxgl.NavigationControl(),'top-left');
+            mapa.addControl(new mapboxgl.FullscreenControl(),'top-left');
+            opt = {
+                color: "rgba(255,100,100)",
+                };
+            var marker = new mapboxgl.Marker(opt)
+                .setLngLat([lg,lt])
+                .setPopup(new mapboxgl.Popup().setHTML(data))
+                .addTo(mapa);
+             }
+
+
+            mapmaker(token,lg,lt,data);
+        </script>
+        </body>
+</html>      
